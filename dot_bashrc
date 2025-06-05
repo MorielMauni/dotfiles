@@ -156,6 +156,9 @@ if [[ "$TERM" == "xterm" ]]; then
     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }precmd"
 fi
 
+# Activate mise
+eval "$(mise activate bash)"
+
 # Aliases
 alias la='ls -la'
 alias ll='ls -l'
