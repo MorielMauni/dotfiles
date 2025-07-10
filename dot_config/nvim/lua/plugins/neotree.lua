@@ -17,8 +17,7 @@ return {
 				hide_gitignored = false,
 			},
 			follow_current_file = {
-				enabled = true,
-				leave_dirs_open = false,
+				enabled = false,
 			},
 			bind_to_cwd = true,
 		},
