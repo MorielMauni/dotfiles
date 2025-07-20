@@ -85,3 +85,23 @@ if command -v lsd > /dev/null ; then
 fi
 
 alias nfz='nvim $(fzf -m --preview="bat --color=always {}")'
+
+# ~~~~~~~~~~~~~~~ tmux ~~~~~~~~~~~~~~~~~~~~~~~~
+
+set -g allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
+# ~~~~~~~~~~~~~~~ Yazi ~~~~~~~~~~~~~~~~~~~~~~~~
+
+export EDITOR='nvim'
+alias y='yazi'
+# CD into the directory you in
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd <"$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
