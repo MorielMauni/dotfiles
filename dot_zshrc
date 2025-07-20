@@ -17,17 +17,19 @@ setopt SHARE_HISTORY # share history between sessions
 
 # ~~~~~~~~~~~~~~~ Prompt ~~~~~~~~~~~~~~~~~~~~~~~~
 
+# Only configure Pure in interactive shells to avoid async errors
+if [[ $- == *i* ]]; then
+  PURE_GIT_PULL=0
 
-PURE_GIT_PULL=0
+  if [[ "$OSTYPE" == darwin* ]]; then
+    fpath+=("$(brew --prefix)/share/zsh/site-functions")
+  else
+    fpath+=($HOME/.zsh/pure)
+  fi
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  fpath+=("$(brew --prefix)/share/zsh/site-functions")
-else
-  fpath+=($HOME/.zsh/pure)
+  autoload -U promptinit; promptinit
+  prompt pure
 fi
-autoload -U promptinit; promptinit
-
-prompt pure
 
 
 # enable zsh vi-mode
@@ -88,9 +90,6 @@ alias nfz='nvim $(fzf -m --preview="bat --color=always {}")'
 
 # ~~~~~~~~~~~~~~~ tmux ~~~~~~~~~~~~~~~~~~~~~~~~
 
-set -g allow-passthrough on
-set -ga update-environment TERM
-set -ga update-environment TERM_PROGRAM
 
 # ~~~~~~~~~~~~~~~ Yazi ~~~~~~~~~~~~~~~~~~~~~~~~
 
