@@ -1,6 +1,13 @@
 #!/bin/bash
+
+# ---- test 2 ----
+# ensure non-interactive trust
+export MISE_TRUSTED=1
+# ----- end ------
+
 # packages hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
 # $HOME/.local/bin/mise trust $HOME/.config/mise/config.toml && $HOME/.local/bin/mise install
+
 # ------ test -------
 # Ensure mise exists
 if ! command -v $HOME/.local/bin/mise >/dev/null 2>&1; then
@@ -19,3 +26,4 @@ for dir in /workspaces/*; do
         $HOME/.local/bin/mise install -C "$dir"
     fi
 done
+# ------ end -------
