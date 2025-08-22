@@ -1,3 +1,21 @@
 #!/bin/bash
 # packages hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
-$HOME/.local/bin/mise trust $HOME/.config/mise/config.toml && $HOME/.local/bin/mise install
+# $HOME/.local/bin/mise trust $HOME/.config/mise/config.toml && $HOME/.local/bin/mise install
+# ------ test -------
+# Ensure mise exists
+if ! command -v $HOME/.local/bin/mise >/dev/null 2>&1; then
+    exit 0
+fi
+
+# Trust and install home config
+$HOME/.local/bin/mise trust $HOME/.config/mise/config.toml
+$HOME/.local/bin/mise install -C $HOME
+
+# Auto-trust and install all workspaces
+for dir in /workspaces/*; do
+    if [ -f "$dir/.mise.toml" ]; then
+        echo "Trusting and installing mise tools in $dir"
+        $HOME/.local/bin/mise trust "$dir/.mise.toml"
+        $HOME/.local/bin/mise install -C "$dir"
+    fi
+done
