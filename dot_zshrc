@@ -7,7 +7,7 @@ fi
 
 
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
-
+eval "$(atuin init zsh)"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
