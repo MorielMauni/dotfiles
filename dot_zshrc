@@ -91,6 +91,9 @@ alias nfz='nvim $(fzf -m --preview="bat --color=always {}")'
 # ~~~~~~~~~~~~~~~ tmux ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+# ~~~~~~~~~~~~~~~ Zoxide ~~~~~~~~~~~~~~~~~~~~~~~~
+eval "$(zoxide init zsh)"
+
 # ~~~~~~~~~~~~~~~ Yazi ~~~~~~~~~~~~~~~~~~~~~~~~
 
 export EDITOR='nvim'
